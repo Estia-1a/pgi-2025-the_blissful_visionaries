@@ -1,10 +1,10 @@
 #include <estia-image.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+ 
 #include "features.h"
 #include "utils.h"
-
+ 
 void helloWorld()
 {
     printf("Hello World !");
@@ -31,19 +31,19 @@ void tenth_pixel(char *source_path)
     {
         printf("Erreur avec le fichier : %s\n", source_path);
     }
-
+ 
     int x = 9;
     int y = 0;
     int pixel_index = (y * width + x) * channel_count;
-
+ 
     int R = data[pixel_index];
     int G = data[pixel_index + 1];
     int B = data[pixel_index + 2];
-
+ 
     printf("tenth_pixel: %d, %d, %d\n", R, G, B);
     free_image_data(data);
 }
-
+ 
 void first_pixel(char *source_path)
 {
     unsigned char *data;
@@ -52,19 +52,19 @@ void first_pixel(char *source_path)
     {
         printf("Erreur avec le fichier : %s\n", source_path);
     }
-
+ 
     int x = 0;
     int y = 0;
     int pixel_index = (y * width + x) * channel_count;
-
+ 
     int R = data[pixel_index];
     int G = data[pixel_index + 1];
     int B = data[pixel_index + 2];
-
+ 
     printf("first_pixel: %d, %d, %d\n", R, G, B);
     free_image_data(data);
 }
-
+ 
 void second_line(char *source_path)
 {
     unsigned char *data;
@@ -73,46 +73,46 @@ void second_line(char *source_path)
     {
         printf("Erreur avec le fichier : %s\n", source_path);
     }
-
+ 
     int x = 1;
     int y = 0;
     int pixel_index = (y * width + x) * channel_count;
-
+ 
     int R = data[pixel_index];
     int G = data[pixel_index + 1];
     int B = data[pixel_index + 2];
-
+ 
     printf("second_line: %d, %d, %d\n", R, G, B);
     free_image_data(data);
 }
-
+ 
 void max_pixel(char *source_path)
 {
     unsigned char *data;
     int width, height, channel_count;
-
+ 
     if (read_image_data(source_path, &data, &width, &height, &channel_count) == 0)
     {
         printf("Erreur avec le fichier : %s\n", source_path);
         return;
     }
-
+ 
     int max_sum = -1;
     int max_x = 0;
     int max_y = 0;
     int max_R = 0, max_G = 0, max_B = 0;
-
+ 
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
             int index = (y * width + x) * channel_count;
-
+ 
             int R = data[index];
             int G = data[index + 1];
             int B = data[index + 2];
             int sum = R + G + B;
-
+ 
             if (sum > max_sum)
             {
                 max_sum = sum;
@@ -124,38 +124,38 @@ void max_pixel(char *source_path)
             }
         }
     }
-
+ 
     printf("max_pixel (%d, %d): %d, %d, %d\n", max_x, max_y, max_R, max_G, max_B);
     free_image_data(data);
 }
-
+ 
 void min_pixel(char *source_path)
 {
     unsigned char *data;
     int width, height, channel_count;
-
+ 
     if (read_image_data(source_path, &data, &width, &height, &channel_count) == 0)
     {
         printf("Erreur avec le fichier : %s\n", source_path);
         return;
     }
-
+ 
     int min_sum = 256 * 3 + 1;
     int min_x = 0;
     int min_y = 0;
     int min_R = 0, min_G = 0, min_B = 0;
-
+ 
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
             int index = (y * width + x) * channel_count;
-
+ 
             int R = data[index];
             int G = data[index + 1];
             int B = data[index + 2];
             int sum = R + G + B;
-
+ 
             if (sum < min_sum)
             {
                 min_sum = sum;
@@ -167,26 +167,26 @@ void min_pixel(char *source_path)
             }
         }
     }
-
+ 
     printf("min_pixel (%d, %d): %d, %d, %d\n", min_x, min_y, min_R, min_G, min_B);
     free_image_data(data);
 }
-
+ 
 void max_component(char *source_path, char component)
 {
     unsigned char *data;
     int width, height, channel_count;
-
+ 
     if (read_image_data(source_path, &data, &width, &height, &channel_count) == 0)
     {
         printf("Erreur avec le fichier : %s\n", source_path);
         return;
     }
-
+ 
     int max_val = -1;
     int max_x = 0, max_y = 0;
     int comp_index = 0;
-
+ 
     if (component == 'R')
         comp_index = 0;
     else if (component == 'G')
@@ -199,14 +199,14 @@ void max_component(char *source_path, char component)
         free_image_data(data);
         return;
     }
-
+ 
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
             int index = (y * width + x) * channel_count;
             int value = data[index + comp_index];
-
+ 
             if (value > max_val)
             {
                 max_val = value;
@@ -215,26 +215,26 @@ void max_component(char *source_path, char component)
             }
         }
     }
-
+ 
     printf("max_component %c (%d, %d): %d\n", component, max_x, max_y, max_val);
     free_image_data(data);
 }
-
+ 
 void min_component(char *source_path, char component)
 {
     unsigned char *data;
     int width, height, channel_count;
-
+ 
     if (read_image_data(source_path, &data, &width, &height, &channel_count) == 0)
     {
         printf("Erreur avec le fichier : %s\n", source_path);
         return;
     }
-
+ 
     int min_val = 256;
     int min_x = 0, min_y = 0;
     int comp_index = 0;
-
+ 
     if (component == 'R')
         comp_index = 0;
     else if (component == 'G')
@@ -247,14 +247,14 @@ void min_component(char *source_path, char component)
         free_image_data(data);
         return;
     }
-
+ 
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
             int index = (y * width + x) * channel_count;
             int value = data[index + comp_index];
-
+ 
             if (value < min_val)
             {
                 min_val = value;
@@ -263,7 +263,9 @@ void min_component(char *source_path, char component)
             }
         }
     }
-
+ 
     printf("min_component %c (%d, %d): %d\n", component, min_x, min_y, min_val);
     free_image_data(data);
 }
+
+ 
