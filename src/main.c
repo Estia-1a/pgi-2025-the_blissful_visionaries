@@ -74,6 +74,23 @@ int main(int argc, char **argv)
 
     max_component(configuration.filenames[0], component);
   }
+  else if (strcmp(configuration.command, "min_component") == 0)
+  {
+    if (configuration.arguments[0] == NULL)
+    {
+      printf("Erreur : spécifiez une composante R, G ou B après min_component.\n");
+      return 1;
+    }
+
+    char component = configuration.arguments[0][0];
+    if (component != 'R' && component != 'G' && component != 'B')
+    {
+      printf("Erreur : composante invalide. Utilisez R, G ou B.\n");
+      return 1;
+    }
+
+    min_component(configuration.filenames[0], component);
+  }
   /*
    * TO COMPLETE
    */
