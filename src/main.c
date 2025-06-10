@@ -90,6 +90,8 @@ int main(int argc, char **argv)
     }
  
     min_component(configuration.filenames[0], component);
+  } else if (strcmp(configuration.command, "color_red") == 0) {
+    keep_red_component(configuration.filenames[0]);
   }
   /*
    * TO COMPLETE

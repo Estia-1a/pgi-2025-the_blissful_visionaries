@@ -1,7 +1,6 @@
 #include <estia-image.h>
 #include <stdio.h>
 #include <stdlib.h>
- 
 #include "features.h"
 #include "utils.h"
  
@@ -268,4 +267,33 @@ void min_component(char *source_path, char component)
     free_image_data(data);
 }
 
- 
+ void keep_red_component(const char *input_filename) {
+    int width, height, channels;
+    unsigned char* data;
+
+    if (read_image_data(input_filename, &data, &width, &height, &channels) == 0)
+    {
+        printf("Erreur avec le fichier : %s\n", input_filename);
+        return;
+    }
+
+    int size = width * height * channels;
+
+    // Modifier les composantes vertes et bleues à 0 pour ne garder que le rouge
+    for (int i = 0; i < size; i += channels) {
+        // Garde le rouge
+        // Met le vert et bleu à zéro (si l'image a au moins 3 canaux)
+        if (channels >= 3) {
+            data[i + 1] = 0; // Vert
+            data[i + 2] = 0; // Bleu
+        }
+    }
+
+    // Écrire l'image modifiée
+    if (!write_image_data("image_out.bmp", data, width, height)) {
+        printf("Erreur lors de l'écriture de l'image.\n");
+    }
+
+    // Libérer la mémoire
+    free(data);
+}
