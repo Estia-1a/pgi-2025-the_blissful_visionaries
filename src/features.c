@@ -267,6 +267,7 @@ void min_component(char *source_path, char component)
     printf("min_component %c (%d, %d): %d\n", component, min_x, min_y, min_val);
     free_image_data(data);
 }
+
 void stat_report(char *source_path)
 {
     unsigned char *data;

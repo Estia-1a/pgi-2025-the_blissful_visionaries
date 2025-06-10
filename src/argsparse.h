@@ -3,11 +3,11 @@
 */
 #ifndef ARGSPARSE_H
 #define ARGSPARSE_H
-
+ 
 #include "configp.h"
-
+ 
 void parse_arguments( int argc, char **argv, Config * conf);
 void check_file();
 void check_debug_mode(Config conf);
-
+ 
 #endif

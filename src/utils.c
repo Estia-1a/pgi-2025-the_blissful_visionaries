@@ -1,6 +1,5 @@
-#include <estia-image.h>
-
 #include "utils.h"
+#include <stddef.h>
 
 /**
  * @brief Here, you have to define functions of the pixel struct : getPixel and setPixel.
