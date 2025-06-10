@@ -6,13 +6,13 @@
 #include <stdlib.h>
 #include <string.h>
 //#include <unistd.h>
-
+ 
 #include "argsparse.h"
-
+ 
 static int file_count = 0 ;
 static int argument_count = 0 ;
 static int debug;
-
+ 
 void parse_arguments( int argc, char **argv, Config* conf ) {
   int c ;
   int length ;
@@ -26,11 +26,11 @@ void parse_arguments( int argc, char **argv, Config* conf ) {
       {"type",  required_argument, 0, 't'},
       {0, 0, 0, 0}
     };
-
-
+ 
+ 
   while (1) {
       int option_index = 0;
-
+ 
       c = getopt_long (argc, argv, "f:c:v:", long_options, &option_index);
       conf->debug_mode=debug;
       /* Detect the end of the options. */
@@ -49,7 +49,7 @@ void parse_arguments( int argc, char **argv, Config* conf ) {
           strncpy( conf->command, optarg, MAX_LENGTH_COMMAND ) ;
           break;
         case 't':
-
+ 
           break;
         case '?':
           /* getopt_long already printed an error message. */
@@ -74,14 +74,14 @@ void parse_arguments( int argc, char **argv, Config* conf ) {
         }
       }
 }
-
+ 
 void check_file() {
     if ( file_count < 1 ) {
         printf("Missing file\n" );
         abort();
     }
 }
-
+ 
 void check_debug_mode(Config conf) {
     if (conf.debug_mode) {
         printf("debug flag is set");

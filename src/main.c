@@ -49,6 +49,15 @@ int main(int argc, char **argv)
   {
     second_line(configuration.filenames[0]);
   }
+  else if (strcmp(configuration.command, "print_pixel") == 0) {
+    if (configuration.arg_count >= 2) {
+        int x = atoi(configuration.args[0]);
+        int y = atoi(configuration.args[1]);
+        print_pixel(configuration.filenames[0], x, y);
+    } else {
+        printf("Erreur : coordonnées manquantes\n");
+    }
+}
   /*
    * TO COMPLETE
    */

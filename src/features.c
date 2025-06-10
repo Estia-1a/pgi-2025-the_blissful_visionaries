@@ -84,3 +84,24 @@ void second_line(char *source_path)
     printf("second_line: %d, %d, %d\n", R, G, B);
     free_image_data(data);
 }
+
+void print_pixel(char *filename, int x, int y) {
+    unsigned char *data;
+    int width, height, n;
+
+    // Lecture de l’image
+    if (read_image_data(filename, &data, &width, &height, &n) != 1) {
+        printf("Erreur : lecture impossible\n");
+        return;
+    }
+
+    pixelRGB *pixel = get_pixel(data, width, height, n, x, y);
+
+    if (pixel == NULL) {
+        printf("Erreur : coordonnées hors limites\n");
+    } else {
+        printf("print_pixel (%d, %d): %d, %d, %d\n", x, y, pixel->r, pixel->g, pixel->b);
+    }
+
+    free_image_data(data);
+}
