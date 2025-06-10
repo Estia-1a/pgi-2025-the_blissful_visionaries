@@ -4,9 +4,8 @@
  
 #include "features.h"
 #include "utils.h"
- 
-void helloWorld()
-{
+
+void helloWorld() {
     printf("Hello World !");
 }
 void dimension(char *filename)
@@ -31,7 +30,7 @@ void tenth_pixel(char *source_path)
     {
         printf("Erreur avec le fichier : %s\n", source_path);
     }
- 
+    
     int x = 9;
     int y = 0;
     int pixel_index = (y * width + x) * channel_count;
@@ -43,4 +42,3 @@ void tenth_pixel(char *source_path)
     printf("tenth_pixel: %d, %d, %d\n", R, G, B);
     free_image_data(data);
 }
- 

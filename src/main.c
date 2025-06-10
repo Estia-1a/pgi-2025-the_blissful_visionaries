@@ -8,7 +8,7 @@
 #include "features.h"
 #include "utils.h"
 #include "argsparse.h"
- 
+
 int main(int argc, char **argv)
 {
   /*To use debug mode:
@@ -41,7 +41,10 @@ int main(int argc, char **argv)
   {
     tenth_pixel(configuration.filenames[0]);
   }
-
+  else if (strcmp(configuration.command, "first_pixel") == 0)
+  {
+    first_pixel(configuration.filenames[0]);
+  }
   /*
    * TO COMPLETE
    */
