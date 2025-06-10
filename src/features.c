@@ -64,3 +64,24 @@ void first_pixel(char *source_path)
     printf("first_pixel: %d, %d, %d\n", R, G, B);
     free_image_data(data);
 }
+
+void second_line(char *source_path)
+{
+    unsigned char *data;
+    int width, height, channel_count;
+    if (read_image_data(source_path, &data, &width, &height, &channel_count) == 0)
+    {
+        printf("Erreur avec le fichier : %s\n", source_path);
+    }
+
+    int x = 1;
+    int y = 0;
+    int pixel_index = (y * width + x) * channel_count;
+
+    int R = data[pixel_index];
+    int G = data[pixel_index + 1];
+    int B = data[pixel_index + 2];
+
+    printf("second_line: %d, %d, %d\n", R, G, B);
+    free_image_data(data);
+}

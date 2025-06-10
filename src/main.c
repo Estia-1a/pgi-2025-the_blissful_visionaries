@@ -45,6 +45,10 @@ int main(int argc, char **argv)
   {
     first_pixel(configuration.filenames[0]);
   }
+  else if (strcmp(configuration.command, "second_line") == 0)
+  {
+    second_line(configuration.filenames[0]);
+  }
   /*
    * TO COMPLETE
    */
