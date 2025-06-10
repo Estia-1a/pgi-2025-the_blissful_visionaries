@@ -267,3 +267,56 @@ void min_component(char *source_path, char component)
     printf("min_component %c (%d, %d): %d\n", component, min_x, min_y, min_val);
     free_image_data(data);
 }
+void stat_report(char *source_path)
+{
+    unsigned char *data;
+    int width, height, channels;
+
+    if (!read_image_data(source_path, &data, &width, &height, &channels))
+    {
+        printf("Erreur avec le fichier : %s\n", source_path);
+        return;
+    }
+
+    FILE *file = fopen("stat_report.txt", "w");
+    if (file == NULL)
+    {
+        printf("Erreur lors de la création du fichier de rapport.\n");
+        free_image_data(data);
+        return;
+    }
+
+#define WRITE_COMPONENT_EXTREME(fn, label, c)                                   \
+    do                                                                          \
+    {                                                                           \
+        int x = 0, y = 0, val = (fn)(data, width, height, channels, c, &x, &y); \
+        fprintf(file, "%s %c (%d, %d): %d\n\n", label, c, x, y, val);           \
+    } while (0)
+
+#define WRITE_PIXEL_SUM(fn, label)                                          \
+    do                                                                      \
+    {                                                                       \
+        int x = 0, y = 0, r = 0, g = 0, b = 0;                              \
+        (fn)(data, width, height, channels, &x, &y, &r, &g, &b);            \
+        fprintf(file, "%s (%d, %d): %d, %d, %d\n\n", label, x, y, r, g, b); \
+    } while (0)
+
+    WRITE_PIXEL_SUM(find_max_pixel, "max_pixel");
+    WRITE_PIXEL_SUM(find_min_pixel, "min_pixel");
+
+    WRITE_COMPONENT_EXTREME(find_max_component, "max_component", 'R');
+    WRITE_COMPONENT_EXTREME(find_max_component, "max_component", 'G');
+    WRITE_COMPONENT_EXTREME(find_max_component, "max_component", 'B');
+
+    WRITE_COMPONENT_EXTREME(find_min_component, "min_component", 'R');
+    WRITE_COMPONENT_EXTREME(find_min_component, "min_component", 'G');
+    WRITE_COMPONENT_EXTREME(find_min_component, "min_component", 'B');
+
+#undef WRITE_COMPONENT_EXTREME
+#undef WRITE_PIXEL_SUM
+
+    fclose(file);
+    free_image_data(data);
+
+    printf("stat_report.txt généré avec succès.\n");
+}
