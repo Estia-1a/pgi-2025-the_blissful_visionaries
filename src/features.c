@@ -140,7 +140,7 @@ void min_pixel(char *source_path)
         return;
     }
 
-    int min_sum = 256 * 3 + 1; // plus grand que la somme max possible (255*3)
+    int min_sum = 256 * 3 + 1;
     int min_x = 0;
     int min_y = 0;
     int min_R = 0, min_G = 0, min_B = 0;
@@ -169,5 +169,53 @@ void min_pixel(char *source_path)
     }
 
     printf("min_pixel (%d, %d): %d, %d, %d\n", min_x, min_y, min_R, min_G, min_B);
+    free_image_data(data);
+}
+
+void max_component(char *source_path, char component)
+{
+    unsigned char *data;
+    int width, height, channel_count;
+
+    if (read_image_data(source_path, &data, &width, &height, &channel_count) == 0)
+    {
+        printf("Erreur avec le fichier : %s\n", source_path);
+        return;
+    }
+
+    int max_val = -1;
+    int max_x = 0, max_y = 0;
+    int comp_index = 0;
+
+    if (component == 'R')
+        comp_index = 0;
+    else if (component == 'G')
+        comp_index = 1;
+    else if (component == 'B')
+        comp_index = 2;
+    else
+    {
+        printf("Composante invalide: %c (utiliser R, G ou B)\n", component);
+        free_image_data(data);
+        return;
+    }
+
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            int index = (y * width + x) * channel_count;
+            int value = data[index + comp_index];
+
+            if (value > max_val)
+            {
+                max_val = value;
+                max_x = x;
+                max_y = y;
+            }
+        }
+    }
+
+    printf("max_component %c (%d, %d): %d\n", component, max_x, max_y, max_val);
     free_image_data(data);
 }
