@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
- 
+
 #include <estia-image.h>
 #include <getopt.h>
- 
+
 #include "features.h"
 #include "utils.h"
 #include "argsparse.h"
@@ -16,14 +16,14 @@ int main(int argc, char **argv)
    or
    - Simply run your compiled project with start button on the blue menu bar at the bottom of the VS Code window.
    */
- 
+
   /*DO NOT EDIT THIS PART*/
   Config configuration;
   parse_arguments(argc, argv, &configuration);
   check_debug_mode(configuration);
   check_file();
   /* END */
- 
+
   /* Use "if ( strncmp( command, <commandname>, 9 ) == 0 )" to check if your <commandname> is called by program.*/
   /* Example with helloworld command
    * If helloworld is a called command: freud.exe -f images/input/image.jpeg -c helloworld
@@ -48,6 +48,10 @@ int main(int argc, char **argv)
   else if (strcmp(configuration.command, "second_line") == 0)
   {
     second_line(configuration.filenames[0]);
+  }
+  else if (strcmp(configuration.command, "max_pixel") == 0)
+  {
+    max_pixel(configuration.filenames[0]);
   }
   /*
    * TO COMPLETE

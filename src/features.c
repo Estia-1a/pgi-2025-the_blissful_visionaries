@@ -1,11 +1,12 @@
 #include <estia-image.h>
 #include <stdio.h>
 #include <stdlib.h>
- 
+
 #include "features.h"
 #include "utils.h"
 
-void helloWorld() {
+void helloWorld()
+{
     printf("Hello World !");
 }
 void dimension(char *filename)
@@ -30,15 +31,15 @@ void tenth_pixel(char *source_path)
     {
         printf("Erreur avec le fichier : %s\n", source_path);
     }
-    
+
     int x = 9;
     int y = 0;
     int pixel_index = (y * width + x) * channel_count;
- 
+
     int R = data[pixel_index];
     int G = data[pixel_index + 1];
     int B = data[pixel_index + 2];
- 
+
     printf("tenth_pixel: %d, %d, %d\n", R, G, B);
     free_image_data(data);
 }
@@ -82,5 +83,48 @@ void second_line(char *source_path)
     int B = data[pixel_index + 2];
 
     printf("second_line: %d, %d, %d\n", R, G, B);
+    free_image_data(data);
+}
+
+void max_pixel(char *source_path)
+{
+    unsigned char *data;
+    int width, height, channel_count;
+
+    if (read_image_data(source_path, &data, &width, &height, &channel_count) == 0)
+    {
+        printf("Erreur avec le fichier : %s\n", source_path);
+        return;
+    }
+
+    int max_sum = -1;
+    int max_x = 0;
+    int max_y = 0;
+    int max_R = 0, max_G = 0, max_B = 0;
+
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            int index = (y * width + x) * channel_count;
+
+            int R = data[index];
+            int G = data[index + 1];
+            int B = data[index + 2];
+            int sum = R + G + B;
+
+            if (sum > max_sum)
+            {
+                max_sum = sum;
+                max_x = x;
+                max_y = y;
+                max_R = R;
+                max_G = G;
+                max_B = B;
+            }
+        }
+    }
+
+    printf("max_pixel (%d, %d): %d, %d, %d\n", max_x, max_y, max_R, max_G, max_B);
     free_image_data(data);
 }
