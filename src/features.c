@@ -84,7 +84,30 @@ void second_line(char *source_path)
     printf("second_line: %d, %d, %d\n", R, G, B);
     free_image_data(data);
 }
+void print_pixel(char *source_path, int x, int y)
+{
+    unsigned char *data;
+    int width, height, channels;
 
+    if (!read_image_data(source_path, &data, &width, &height, &channels))
+    {
+        printf("Erreur : impossible de lire l'image\n");
+        return;
+    }
+
+    pixelRGB *pixel = get_pixel(data, width, height, channels, x, y);
+    if (pixel == NULL)
+    {
+        printf("Pixel (%d, %d) invalide\n", x, y);
+        free_image_data(data);
+        return;
+    }
+
+    printf("print_pixel (%d, %d): %d, %d, %d\n", x, y, pixel->R, pixel->G, pixel->B);
+
+    free(pixel);
+    free_image_data(data);
+}
 void max_pixel(char *source_path)
 {
     unsigned char *data;
