@@ -62,6 +62,7 @@ int main(int argc, char **argv)
 
     print_pixel(configuration.filenames[0], x, y);
   }
+
   else if (strcmp(configuration.command, "max_pixel") == 0)
   {
     max_pixel(configuration.filenames[0]);
@@ -108,72 +109,72 @@ int main(int argc, char **argv)
   {
     stat_report(configuration.filenames[0]);
   }
-  if (strncmp(configuration.command, "color_red", 9) == 0)
+  else if (strncmp(configuration.command, "color_red", 9) == 0)
   {
     color_red(configuration.filenames[0]);
   }
-  if (strncmp(configuration.command, "color_green", 11) == 0)
+  else if (strncmp(configuration.command, "color_green", 11) == 0)
   {
     color_green(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "color_blue", 10) == 0)
+  else if (strncmp(configuration.command, "color_blue", 10) == 0)
   {
     color_blue(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "color_gray", 10) == 0)
+  else if (strncmp(configuration.command, "color_gray", 10) == 0)
   {
     color_gray(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "color_invert", 12) == 0)
+  else if (strncmp(configuration.command, "color_invert", 12) == 0)
   {
     color_invert(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "color_gray_luminance", 20) == 0)
+  else if (strncmp(configuration.command, "color_gray_luminance", 20) == 0)
   {
     color_gray_luminance(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "rotate_cw", 9) == 0)
+  else if (strncmp(configuration.command, "rotate_cw", 9) == 0)
   {
     rotate_cw(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "rotate_acw", 10) == 0)
+  else if (strncmp(configuration.command, "rotate_acw", 10) == 0)
   {
     rotate_acw(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "mirror_horizontal", 17) == 0)
+  else if (strncmp(configuration.command, "mirror_horizontal", 17) == 0)
   {
     mirror_horizontal(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "mirror_vertical", 15) == 0)
+  else if (strncmp(configuration.command, "mirror_vertical", 15) == 0)
   {
     mirror_vertical(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "mirror_total", 12) == 0)
+  else if (strncmp(configuration.command, "mirror_total", 12) == 0)
   {
     mirror_total(configuration.filenames[0]);
   }
-  if (strncmp(configuration.command, "scale_crop", 10) == 0)
+  else if (strncmp(configuration.command, "scale_crop", 10) == 0)
   {
     scale_crop(configuration.filenames[0], atoi(configuration.arguments[0]), atoi(configuration.arguments[1]), atoi(configuration.arguments[2]), atoi(configuration.arguments[3]));
   }
-  if (strncmp(configuration.command, "scale_nearest", 13) == 0)
+  else if (strncmp(configuration.command, "scale_nearest", 13) == 0)
   {
     scale_nearest(configuration.filenames[0], atof(configuration.arguments[0]));
   }
-  if (strncmp(configuration.command, "scale_bilinear", 14) == 0)
+  else if (strncmp(configuration.command, "scale_bilinear", 14) == 0)
   {
     scale_bilinear(configuration.filenames[0], atof(configuration.arguments[0]));
   }
-  if (strncmp(configuration.command, "color_desaturate", 16) == 0)
+  else if (strncmp(configuration.command, "color_desaturate", 16) == 0)
   {
     color_desaturate(configuration.filenames[0]);
   }
