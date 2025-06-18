@@ -159,5 +159,9 @@ int main(int argc, char **argv)
   {
     scale_nearest(configuration.filenames[0], atof(configuration.arguments[0]));
   }
+  if (strncmp(configuration.command, "scale_bilinear", 14) == 0)
+  {
+    scale_bilinear(configuration.filenames[0], atof(configuration.arguments[0]));
+  }
   return 0;
 }
