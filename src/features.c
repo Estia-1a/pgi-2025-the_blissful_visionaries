@@ -1,10 +1,6 @@
 #include <estia-image.h>
 #include <stdio.h>
 #include <stdlib.h>
-<<<<<<< HEAD
-=======
-
->>>>>>> 61ded394ad0dd25c831cad73be8ef2e80014d23d
 #include "features.h"
 #include "utils.h"
 
@@ -345,6 +341,7 @@ void stat_report(char *source_path)
     printf("stat_report.txt généré avec succès.\n");
 }
 void color_green(char *source_path) {
+    printf(">>>>>>>>>>>>>>>>>>>>>>>>> green\n");
     int width, height, channel_count;
     unsigned char *data;
 

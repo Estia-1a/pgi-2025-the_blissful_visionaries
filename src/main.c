@@ -73,9 +73,7 @@ int main(int argc, char **argv)
     }
  
     max_component(configuration.filenames[0], component);
-  }
-  else if (strcmp(configuration.command, "min_component") == 0)
-  {
+  } else if (strcmp(configuration.command, "min_component") == 0) {
     if (configuration.arguments[0] == NULL)
     {
       printf("Erreur : spécifiez une composante R, G ou B après min_component.\n");
@@ -90,6 +88,7 @@ int main(int argc, char **argv)
     }
  
     min_component(configuration.filenames[0], component);
+  }
   if (strncmp(configuration.command, "color_red", 9) == 0) {
     color_red(configuration.filenames[0]);
   }
@@ -111,3 +110,6 @@ int main(int argc, char **argv)
 
   if (strncmp(configuration.command, "color_gray_luminance", 20) == 0) {
     color_gray_luminance(configuration.filenames[0]);
+  }
+  return 0;
+}
