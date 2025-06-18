@@ -1,0 +1,61 @@
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c:4:1: error: version control conflict marker in file
+    4 | <<<<<<< HEAD
+      | ^~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c:7:9: error: invalid suffix "ded394ad0dd25c831cad73be8ef2e80014d23d" on integer constant
+    7 | >>>>>>> 61ded394ad0dd25c831cad73be8ef2e80014d23d
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c: In function ‘color_red’:
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c:284:31: warning: implicit declaration of function ‘get_pixel’; did you mean ‘min_pixel’? [-Wimplicit-function-declaration]
+  284 |             pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+      |                               ^~~~~~~~~
+      |                               min_pixel
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c:284:31: warning: initialization of ‘pixelRGB *’ {aka ‘struct _pixelRGB *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c: In function ‘color_green’:
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c:357:31: warning: initialization of ‘pixelRGB *’ {aka ‘struct _pixelRGB *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+  357 |             pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+      |                               ^~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c: In function ‘color_blue’:
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c:377:31: warning: initialization of ‘pixelRGB *’ {aka ‘struct _pixelRGB *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+  377 |             pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+      |                               ^~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c: In function ‘main’:
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c: In function ‘color_gray’:
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c:397:31: warning: initialization of ‘pixelRGB *’ {aka ‘struct _pixelRGB *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+  397 |             pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+      |                               ^~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:94:5: warning: implicit declaration of function ‘color_red’ [-Wimplicit-function-declaration]
+   94 |     color_red(configuration.filenames[0]);
+      |     ^~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c: In function ‘color_invert’:
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c:417:31: warning: initialization of ‘pixelRGB *’ {aka ‘struct _pixelRGB *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+  417 |             pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+      |                               ^~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:97:5: warning: implicit declaration of function ‘color_green’ [-Wimplicit-function-declaration]
+   97 |     color_green(configuration.filenames[0]);
+      |     ^~~~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c: In function ‘color_gray_luminance’:
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/features.c:436:31: warning: initialization of ‘pixelRGB *’ {aka ‘struct _pixelRGB *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+  436 |             pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+      |                               ^~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:101:5: warning: implicit declaration of function ‘color_blue’ [-Wimplicit-function-declaration]
+  101 |     color_blue(configuration.filenames[0]);
+      |     ^~~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:105:5: warning: implicit declaration of function ‘color_gray’ [-Wimplicit-function-declaration]
+  105 |     color_gray(configuration.filenames[0]);
+      |     ^~~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:109:5: warning: implicit declaration of function ‘color_invert’ [-Wimplicit-function-declaration]
+  109 |     color_invert(configuration.filenames[0]);
+      |     ^~~~~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:113:5: warning: implicit declaration of function ‘color_gray_luminance’ [-Wimplicit-function-declaration]
+  113 |     color_gray_luminance(configuration.filenames[0]);
+      |     ^~~~~~~~~~~~~~~~~~~~
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:113:5: error: expected declaration or statement at end of input
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:113:5: error: expected declaration or statement at end of input
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:113:5: error: expected declaration or statement at end of input
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:107: CMakeFiles/freud.dir/src/main.c.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:93: CMakeFiles/freud.dir/src/features.c.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/freud.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
+
+The process '/usr/local/bin/cmake' failed with exit code 2
