@@ -1,0 +1,4 @@
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c: In function ‘main’:
+/home/runner/work/pgi-2025-the_blissful_visionaries/pgi-2025-the_blissful_visionaries/src/main.c:96:5: warning: implicit declaration of function ‘stat_report’ [-Wimplicit-function-declaration]
+   96 |     stat_report(configuration.filenames[0]);
+      |     ^~~~~~~~~~~
