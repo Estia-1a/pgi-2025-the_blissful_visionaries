@@ -267,17 +267,20 @@ void min_component(char *source_path, char component)
     free_image_data(data);
 }
 
-void color_red(char *source_path) {
+void color_red(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            pixelRGB *pixel = get_pixel(data, width, height, channel_count, x, y);
             unsigned char red = pixel->R;
             new_data[(y * width + x) * channel_count] = red;
             new_data[(y * width + x) * channel_count + 1] = 0;
@@ -294,50 +297,48 @@ void stat_report(char *source_path)
 
     if (!read_image_data(source_path, &data, &width, &height, &channels))
     {
-        printf("Erreur avec le fichier : %s\n", source_path);
+        printf("Erreur lors de la lecture de l'image.\n");
         return;
     }
 
     FILE *file = fopen("stat_report.txt", "w");
     if (file == NULL)
     {
-        printf("Erreur lors de la création du fichier de rapport.\n");
+        printf("Erreur : impossible de créer le fichier stat_report.txt\n");
         free_image_data(data);
         return;
     }
 
-#define WRITE_COMPONENT_EXTREME(fn, label, c)                                   \
-    do                                                                          \
-    {                                                                           \
-        int x = 0, y = 0, val = (fn)(data, width, height, channels, c, &x, &y); \
-        fprintf(file, "%s %c (%d, %d): %d\n\n", label, c, x, y, val);           \
-    } while (0)
+    int x, y, r, g, b, val;
 
-#define WRITE_PIXEL_SUM(fn, label)                                          \
-    do                                                                      \
-    {                                                                       \
-        int x = 0, y = 0, r = 0, g = 0, b = 0;                              \
-        (fn)(data, width, height, channels, &x, &y, &r, &g, &b);            \
-        fprintf(file, "%s (%d, %d): %d, %d, %d\n\n", label, x, y, r, g, b); \
-    } while (0)
+    find_max_pixel(data, width, height, channels, &x, &y, &r, &g, &b);
+    fprintf(file, "max_pixel (%d, %d): %d, %d, %d\n\n", x, y, r, g, b);
 
-    WRITE_PIXEL_SUM(find_max_pixel, "max_pixel");
-    WRITE_PIXEL_SUM(find_min_pixel, "min_pixel");
+    find_min_pixel(data, width, height, channels, &x, &y, &r, &g, &b);
+    fprintf(file, "min_pixel (%d, %d): %d, %d, %d\n\n", x, y, r, g, b);
 
-    WRITE_COMPONENT_EXTREME(find_max_component, "max_component", 'R');
-    WRITE_COMPONENT_EXTREME(find_max_component, "max_component", 'G');
-    WRITE_COMPONENT_EXTREME(find_max_component, "max_component", 'B');
+    val = find_max_component(data, width, height, channels, 'R', &x, &y);
+    fprintf(file, "max_component R (%d, %d): %d\n\n", x, y, val);
 
-    WRITE_COMPONENT_EXTREME(find_min_component, "min_component", 'R');
-    WRITE_COMPONENT_EXTREME(find_min_component, "min_component", 'G');
-    WRITE_COMPONENT_EXTREME(find_min_component, "min_component", 'B');
+    val = find_max_component(data, width, height, channels, 'G', &x, &y);
+    fprintf(file, "max_component G (%d, %d): %d\n\n", x, y, val);
 
-#undef WRITE_COMPONENT_EXTREME
-#undef WRITE_PIXEL_SUM
+    val = find_max_component(data, width, height, channels, 'B', &x, &y);
+    fprintf(file, "max_component B (%d, %d): %d\n\n", x, y, val);
+
+    val = find_min_component(data, width, height, channels, 'R', &x, &y);
+    fprintf(file, "min_component R (%d, %d): %d\n\n", x, y, val);
+
+    val = find_min_component(data, width, height, channels, 'G', &x, &y);
+    fprintf(file, "min_component G (%d, %d): %d\n\n", x, y, val);
+
+    val = find_min_component(data, width, height, channels, 'B', &x, &y);
+    fprintf(file, "min_component B (%d, %d): %d\n\n", x, y, val);
 
     fclose(file);
     free_image_data(data);
 
+    printf("Le fichier stat_report.txt a été généré avec succès.\n");
     printf("stat_report.txt généré avec succès.\n");
 }
 void color_green(char *source_path) {
@@ -346,94 +347,108 @@ void color_green(char *source_path) {
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            pixelRGB *pixel = get_pixel(data, width, height, channel_count, x, y);
             unsigned char green = pixel->G;
             new_data[(y * width + x) * channel_count] = 0;
-            new_data[(y * width + x) * channel_count + 1] = green ;
+            new_data[(y * width + x) * channel_count + 1] = green;
             new_data[(y * width + x) * channel_count + 2] = 0;
         }
     }
     write_image_data("image_out.bmp", new_data, width, height);
 }
 
-void color_blue(char *source_path) {
+void color_blue(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
-            unsigned char blue  = pixel->B ;
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            pixelRGB *pixel = get_pixel(data, width, height, channel_count, x, y);
+            unsigned char blue = pixel->B;
             new_data[(y * width + x) * channel_count] = 0;
-            new_data[(y * width + x) * channel_count + 1] = 0 ;
+            new_data[(y * width + x) * channel_count + 1] = 0;
             new_data[(y * width + x) * channel_count + 2] = blue;
         }
     }
     write_image_data("image_out.bmp", new_data, width, height);
 }
 
-void color_gray(char *source_path) {
+void color_gray(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            pixelRGB *pixel = get_pixel(data, width, height, channel_count, x, y);
             unsigned char gray = (pixel->R + pixel->G + pixel->B) / 3;
             new_data[(y * width + x) * channel_count] = gray;
-            new_data[(y * width + x) * channel_count + 1] = gray ;
+            new_data[(y * width + x) * channel_count + 1] = gray;
             new_data[(y * width + x) * channel_count + 2] = gray;
         }
     }
     write_image_data("image_out.bmp", new_data, width, height);
 }
 
-void color_invert(char *source_path) {
+void color_invert(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            pixelRGB *pixel = get_pixel(data, width, height, channel_count, x, y);
             new_data[(y * width + x) * channel_count] = 255 - pixel->R;
-            new_data[(y * width + x) * channel_count + 1] =255 - pixel->G;
-            new_data[(y * width + x) * channel_count + 2] = 255 - pixel->B ; 
+            new_data[(y * width + x) * channel_count + 1] = 255 - pixel->G;
+            new_data[(y * width + x) * channel_count + 2] = 255 - pixel->B;
         }
     }
     write_image_data("image_out.bmp", new_data, width, height);
-} 
+}
 
-void color_gray_luminance(char *source_path) {
+void color_gray_luminance(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            pixelRGB *pixel = get_pixel(data, width, height, channel_count, x, y);
             unsigned char value = 0.21 * pixel->R + 0.72 * pixel->G + 0.07 * pixel->B;
             new_data[(y * width + x) * channel_count] = value;
-            new_data[(y * width + x) * channel_count + 1] =value;
-            new_data[(y * width + x) * channel_count + 2] = value ; 
+            new_data[(y * width + x) * channel_count + 1] = value;
+            new_data[(y * width + x) * channel_count + 2] = value;
         }
     }
     write_image_data("image_out.bmp", new_data, width, height);
