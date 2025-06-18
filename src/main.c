@@ -163,5 +163,9 @@ int main(int argc, char **argv)
   {
     scale_bilinear(configuration.filenames[0], atof(configuration.arguments[0]));
   }
+  if (strncmp(configuration.command, "color_desaturate", 16) == 0)
+  {
+    color_desaturate(configuration.filenames[0]);
+  }
   return 0;
 }
