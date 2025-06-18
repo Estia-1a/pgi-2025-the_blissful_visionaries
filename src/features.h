@@ -13,5 +13,4 @@ void min_component(char *source_path, char component);
 void keep_red_component(const char *input_filename);
 
 
-void stat_report(char *source_path);
 #endif

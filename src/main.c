@@ -90,11 +90,24 @@ int main(int argc, char **argv)
     }
  
     min_component(configuration.filenames[0], component);
-  } else if (strcmp(configuration.command, "color_red") == 0) {
-    keep_red_component(configuration.filenames[0]);
+  if (strncmp(configuration.command, "color_red", 9) == 0) {
+    color_red(configuration.filenames[0]);
   }
-  /*
-   * TO COMPLETE
-   */
-  return 0;
-}
+  if (strncmp(configuration.command, "color_green", 11) == 0) {
+    color_green(configuration.filenames[0]);
+  }
+
+  if (strncmp(configuration.command, "color_blue", 10) == 0) {
+    color_blue(configuration.filenames[0]);
+  }
+
+  if (strncmp(configuration.command, "color_gray", 10) == 0) {
+    color_gray(configuration.filenames[0]);
+  }
+
+  if (strncmp(configuration.command, "color_invert", 12) == 0) {
+    color_invert(configuration.filenames[0]);
+  }
+
+  if (strncmp(configuration.command, "color_gray_luminance", 20) == 0) {
+    color_gray_luminance(configuration.filenames[0]);
