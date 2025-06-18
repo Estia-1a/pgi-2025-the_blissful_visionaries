@@ -126,26 +126,34 @@ int main(int argc, char **argv)
   {
     color_gray_luminance(configuration.filenames[0]);
   }
-  
-  if (strncmp(configuration.command, "rotate_cw", 9) == 0) {
+
+  if (strncmp(configuration.command, "rotate_cw", 9) == 0)
+  {
     rotate_cw(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "rotate_acw", 10) == 0) {
+  if (strncmp(configuration.command, "rotate_acw", 10) == 0)
+  {
     rotate_acw(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "mirror_horizontal", 17) == 0) {
+  if (strncmp(configuration.command, "mirror_horizontal", 17) == 0)
+  {
     mirror_horizontal(configuration.filenames[0]);
   }
-  
-  if (strncmp(configuration.command, "mirror_vertical", 15) == 0) {
+
+  if (strncmp(configuration.command, "mirror_vertical", 15) == 0)
+  {
     mirror_vertical(configuration.filenames[0]);
   }
 
-  if (strncmp(configuration.command, "mirror_total", 12) == 0) {
+  if (strncmp(configuration.command, "mirror_total", 12) == 0)
+  {
     mirror_total(configuration.filenames[0]);
-    }
-
-return 0;
+  }
+  if (strncmp(configuration.command, "scale_crop", 10) == 0)
+  {
+    scale_crop(configuration.filenames[0], atoi(configuration.arguments[0]), atoi(configuration.arguments[1]), atoi(configuration.arguments[2]), atoi(configuration.arguments[3]));
+  }
+  return 0;
 }

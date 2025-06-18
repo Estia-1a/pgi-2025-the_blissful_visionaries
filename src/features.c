@@ -341,7 +341,8 @@ void stat_report(char *source_path)
     printf("Le fichier stat_report.txt a été généré avec succès.\n");
     printf("stat_report.txt généré avec succès.\n");
 }
-void color_green(char *source_path) {
+void color_green(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
@@ -452,21 +453,25 @@ void color_gray_luminance(char *source_path)
         }
     }
     write_image_data("image_out.bmp", new_data, width, height);
-} 
-void rotate_cw(char *source_path) {
+}
+void rotate_cw(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) { 
-        for (int x = 0; x < width; x++) {
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
             int new_x = height - 1 - y;
             int new_y = x;
 
-            for (int c = 0; c < channel_count; c++) {
+            for (int c = 0; c < channel_count; c++)
+            {
                 new_data[(new_y * height + new_x) * channel_count + c] = data[(y * width + x) * channel_count + c];
             }
         }
@@ -477,43 +482,51 @@ void rotate_cw(char *source_path) {
     free_image_data(data);
 }
 
-void rotate_acw(char *source_path) {
+void rotate_acw(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) { 
-        for (int x = 0; x < width; x++) {
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
             int new_x = y;
             int new_y = width - 1 - x;
 
-            for (int c = 0; c < channel_count; c++) {
+            for (int c = 0; c < channel_count; c++)
+            {
                 new_data[(new_y * height + new_x) * channel_count + c] = data[(y * width + x) * channel_count + c];
             }
         }
     }
-    write_image_data("image_out.bmp", new_data, height, width);  
+    write_image_data("image_out.bmp", new_data, height, width);
     free(new_data);
     free_image_data(data);
 }
 
-void mirror_horizontal(char *source_path) {
+void mirror_horizontal(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) { 
-        for (int x = 0; x < width; x++) {
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
             int new_x = width - 1 - x;
             int new_y = y;
 
-            for (int c = 0; c < channel_count; c++) {
+            for (int c = 0; c < channel_count; c++)
+            {
                 new_data[(new_y * width + new_x) * channel_count + c] = data[(y * width + x) * channel_count + c];
             }
         }
@@ -524,20 +537,24 @@ void mirror_horizontal(char *source_path) {
     free_image_data(data);
 }
 
-void mirror_vertical(char *source_path) {
+void mirror_vertical(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) { 
-        for (int x = 0; x < width; x++) {
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
             int new_x = x;
             int new_y = height - 1 - y;
 
-            for (int c = 0; c < channel_count; c++) {
+            for (int c = 0; c < channel_count; c++)
+            {
                 new_data[(new_y * width + new_x) * channel_count + c] = data[(y * width + x) * channel_count + c];
             }
         }
@@ -548,25 +565,80 @@ void mirror_vertical(char *source_path) {
     free_image_data(data);
 }
 
-void mirror_total(char *source_path) {
+void mirror_total(char *source_path)
+{
     int width, height, channel_count;
     unsigned char *data;
 
     read_image_data(source_path, &data, &width, &height, &channel_count);
 
-    unsigned char *new_data = (unsigned char*)malloc(width * height * channel_count * sizeof(unsigned char));
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
 
-    for (int y = 0; y < height; y++) { 
-        for (int x = 0; x < width; x++) {
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
             int new_x = width - 1 - x;
             int new_y = height - 1 - y;
 
-            for (int c = 0; c < channel_count; c++) {
+            for (int c = 0; c < channel_count; c++)
+            {
                 new_data[(new_y * width + new_x) * channel_count + c] = data[(y * width + x) * channel_count + c];
             }
         }
     }
 
+    write_image_data("image_out.bmp", new_data, width, height);
+    free(new_data);
+    free_image_data(data);
+}
+void scale_crop(char *source_path, int center_x, int center_y, int width, int height)
+{
+    int original_width, original_height, channel_count;
+    unsigned char *data;
+
+    read_image_data(source_path, &data, &original_width, &original_height, &channel_count);
+
+    int x_start = center_x - width / 2;
+    int y_start = center_y - height / 2;
+
+    if (x_start < 0)
+    {
+        x_start = 0;
+    }
+    else if (x_start + width > original_width)
+    {
+        x_start = original_width - width;
+    }
+
+    if (y_start < 0)
+    {
+        y_start = 0;
+    }
+    else if (y_start + height > original_height)
+    {
+        y_start = original_height - height;
+    }
+
+    unsigned char *new_data = (unsigned char *)malloc(width * height * channel_count * sizeof(unsigned char));
+
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            int new_x = x_start + x;
+            int new_y = y_start + y;
+
+            pixelRGB *pixel = get_pixel(data, original_width, original_height, channel_count, new_x, new_y);
+            unsigned char R = pixel->R;
+            unsigned char G = pixel->G;
+            unsigned char B = pixel->B;
+
+            new_data[(y * width + x) * channel_count] = R;
+            new_data[(y * width + x) * channel_count + 1] = G;
+            new_data[(y * width + x) * channel_count + 2] = B;
+        }
+    }
     write_image_data("image_out.bmp", new_data, width, height);
     free(new_data);
     free_image_data(data);
