@@ -275,49 +275,42 @@ void stat_report(char *source_path)
 
     if (!read_image_data(source_path, &data, &width, &height, &channels))
     {
-        printf("Erreur avec le fichier : %s\n", source_path);
+        printf("Erreur de lecture de l'image.\n");
         return;
     }
 
     FILE *file = fopen("stat_report.txt", "w");
     if (file == NULL)
     {
-        printf("Erreur lors de la création du fichier de rapport.\n");
+        printf("Impossible de créer le fichier stat_report.txt\n");
         free_image_data(data);
         return;
     }
 
-#define WRITE_COMPONENT_EXTREME(fn, label, c)                                   \
-    do                                                                          \
-    {                                                                           \
-        int x = 0, y = 0, val = (fn)(data, width, height, channels, c, &x, &y); \
-        fprintf(file, "%s %c (%d, %d): %d\n\n", label, c, x, y, val);           \
-    } while (0)
+    int x, y, r, g, b, val;
 
-#define WRITE_PIXEL_SUM(fn, label)                                          \
-    do                                                                      \
-    {                                                                       \
-        int x = 0, y = 0, r = 0, g = 0, b = 0;                              \
-        (fn)(data, width, height, channels, &x, &y, &r, &g, &b);            \
-        fprintf(file, "%s (%d, %d): %d, %d, %d\n\n", label, x, y, r, g, b); \
-    } while (0)
+    find_max_pixel(data, width, height, channels, &x, &y, &r, &g, &b);
+    fprintf(file, "max_pixel (%d, %d): %d, %d, %d\n\n", x, y, r, g, b);
 
-    WRITE_PIXEL_SUM(find_max_pixel, "max_pixel");
-    WRITE_PIXEL_SUM(find_min_pixel, "min_pixel");
+    find_min_pixel(data, width, height, channels, &x, &y, &r, &g, &b);
+    fprintf(file, "min_pixel (%d, %d): %d, %d, %d\n\n", x, y, r, g, b);
 
-    WRITE_COMPONENT_EXTREME(find_max_component, "max_component", 'R');
-    WRITE_COMPONENT_EXTREME(find_max_component, "max_component", 'G');
-    WRITE_COMPONENT_EXTREME(find_max_component, "max_component", 'B');
+    val = find_max_component(data, width, height, channels, 'R', &x, &y);
+    fprintf(file, "max_component R (%d, %d): %d\n\n", x, y, val);
+    val = find_max_component(data, width, height, channels, 'G', &x, &y);
+    fprintf(file, "max_component G (%d, %d): %d\n\n", x, y, val);
+    val = find_max_component(data, width, height, channels, 'B', &x, y);
+    fprintf(file, "max_component B (%d, %d): %d\n\n", x, y, val);
 
-    WRITE_COMPONENT_EXTREME(find_min_component, "min_component", 'R');
-    WRITE_COMPONENT_EXTREME(find_min_component, "min_component", 'G');
-    WRITE_COMPONENT_EXTREME(find_min_component, "min_component", 'B');
-
-#undef WRITE_COMPONENT_EXTREME
-#undef WRITE_PIXEL_SUM
+    val = find_min_component(data, width, height, channels, 'R', &x, &y);
+    fprintf(file, "min_component R (%d, %d): %d\n\n", x, y, val);
+    val = find_min_component(data, width, height, channels, 'G', &x, &y);
+    fprintf(file, "min_component G (%d, %d): %d\n\n", x, y, val);
+    val = find_min_component(data, width, height, channels, 'B', &x, &y);
+    fprintf(file, "min_component B (%d, %d): %d\n\n", x, y, val);
 
     fclose(file);
     free_image_data(data);
 
-    printf("stat_report.txt généré avec succès.\n");
+    printf("Fichier stat_report.txt créé avec succès !\n");
 }
