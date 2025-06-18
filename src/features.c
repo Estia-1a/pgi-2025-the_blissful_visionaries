@@ -275,14 +275,14 @@ void stat_report(char *source_path)
 
     if (!read_image_data(source_path, &data, &width, &height, &channels))
     {
-        printf("Erreur de lecture de l'image.\n");
+        printf("Erreur lors de la lecture de l'image.\n");
         return;
     }
 
     FILE *file = fopen("stat_report.txt", "w");
     if (file == NULL)
     {
-        printf("Impossible de créer le fichier stat_report.txt\n");
+        printf("Erreur : impossible de créer le fichier stat_report.txt\n");
         free_image_data(data);
         return;
     }
@@ -297,20 +297,24 @@ void stat_report(char *source_path)
 
     val = find_max_component(data, width, height, channels, 'R', &x, &y);
     fprintf(file, "max_component R (%d, %d): %d\n\n", x, y, val);
+
     val = find_max_component(data, width, height, channels, 'G', &x, &y);
     fprintf(file, "max_component G (%d, %d): %d\n\n", x, y, val);
-    val = find_max_component(data, width, height, channels, 'B', &x, y);
+
+    val = find_max_component(data, width, height, channels, 'B', &x, &y);
     fprintf(file, "max_component B (%d, %d): %d\n\n", x, y, val);
 
     val = find_min_component(data, width, height, channels, 'R', &x, &y);
     fprintf(file, "min_component R (%d, %d): %d\n\n", x, y, val);
+
     val = find_min_component(data, width, height, channels, 'G', &x, &y);
     fprintf(file, "min_component G (%d, %d): %d\n\n", x, y, val);
+
     val = find_min_component(data, width, height, channels, 'B', &x, &y);
     fprintf(file, "min_component B (%d, %d): %d\n\n", x, y, val);
 
     fclose(file);
     free_image_data(data);
 
-    printf("Fichier stat_report.txt créé avec succès !\n");
+    printf("Le fichier stat_report.txt a été généré avec succès.\n");
 }
